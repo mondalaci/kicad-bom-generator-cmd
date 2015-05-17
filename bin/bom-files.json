@@ -1,0 +1,17 @@
+[
+    {
+        "name": "left-main",
+        "netlist": "../left-main/left-main.net",
+        "components": "../left-main/left-main.cmp"
+    },
+    {
+        "name": "right-main",
+        "netlist": "../right-main/right-main.net",
+        "components": "../right-main/right-main.cmp"
+    },
+    {
+        "name": "display",
+        "netlist": "../display/display.net",
+        "components": "../display/display.cmp"
+    }
+]
