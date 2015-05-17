@@ -30,7 +30,7 @@ module.exports = function(bomFiles) {
         bomFiles.length > 1 ? R.pluck('name', bomFiles).map(R.replace(/(.*)/, '$1 QTY')) : []
     )];
 
-    componentTypes.forEach(function(componentType) {
+    componentTypes.forEach(function(componentType) {  // Table rows
         componentsStatistics.push([R.concat(
             [
                 componentType,
