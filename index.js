@@ -25,14 +25,23 @@ module.exports = function(bomFiles) {
 
     var componentTypes = R.uniq(components.map(R.prop('type'))).sort();
 
-    var componentsStatistics = componentTypes.map(function(componentType) {
-        return [
-            componentType,
-            components.filter(R.propEq('type', componentType)).length,
-            components.filter(R.where({type:componentType, file:'left-main'})).length,
-            components.filter(R.where({type:componentType, file:'right-main'})).length,
-            components.filter(R.where({type:componentType, file:'display'})).length
-        ];
+    var componentsStatistics = [R.concat(  // Table header
+        ['part', 'total QTY'],
+        bomFiles.length > 1 ? R.pluck('name', bomFiles).map(R.replace(/(.*)/, '$1 QTY')) : []
+    )];
+
+    componentTypes.forEach(function(componentType) {
+        componentsStatistics.push([R.concat(
+            [
+                componentType,
+                components.filter(R.propEq('type', componentType)).length
+            ],
+            bomFiles.length > 1
+                ? bomFiles.map(function(bomFile) {
+                    return components.filter(R.where({type:componentType, file:bomFile.name})).length
+                  })
+                : []
+        )]);
     });
 
     return componentsStatistics;
